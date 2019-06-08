@@ -293,7 +293,7 @@ export class QuizzOption1 extends Component {
     theAPIController = () => {
         const {navigation} = this.props;
         const navigationData = navigation.getParam("selectedOption", "Random");
-        switch(navigation){
+        switch(navigationData){
             // Random returns random questions
             case "Random":
                 return this.apiCall();
