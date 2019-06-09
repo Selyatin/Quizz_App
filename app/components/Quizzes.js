@@ -358,7 +358,7 @@ export class SelectableQuizz extends Component {
                         <Picker.Item style={style.pickerItem} label="True / False" value="boolean"/>
                     </Picker>
                     
-                    <TouchableOpacity style={[style.optionButton, {borderColor: "none", borderWidth: 0, backgroundColor: "#0099ff", marginTop: 0}]} onPress={this.generateURL}>
+                    <TouchableOpacity style={[style.optionButton, {borderColor: "none", borderWidth: 0, backgroundColor: "#0099ff", marginTop: 60}]} onPress={this.generateURL}>
                             <Text style={{fontSize: 20, color: "white"}}>Go</Text>
                         </TouchableOpacity>
                     
