@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import {MainOptions} from "./app/components/MainOptions";
-import {QuizzOption1} from "./app/components/Quizzes";
+import {Quizz, SelectableQuizz} from "./app/components/Quizzes";
 
 // Root code settings for navigation and this acts like a starting point
 const RootStart = createStackNavigator({
@@ -11,8 +11,14 @@ const RootStart = createStackNavigator({
       header: null
     }
   },
-  QuizzOption1: {
-    screen: QuizzOption1,
+  Quizz: {
+    screen: Quizz,
+    navigationOptions: {
+      header: null
+    }
+  },
+  SelectableQuizz: {
+    screen: SelectableQuizz,
     navigationOptions: {
       header: null
     }
