@@ -260,6 +260,7 @@ export class SelectableQuizz extends Component {
         }
     }
 
+    // Functions ran when the app is about to be displayed
     componentWillMount = () => {
         this.setImage();
     }
@@ -274,6 +275,7 @@ export class SelectableQuizz extends Component {
         });
     };
 
+    // Generates the API URL and navigates to the Quizz page
     generateURL = () => {
         
         const difficulty = this.state.difficulty;
@@ -301,13 +303,16 @@ export class SelectableQuizz extends Component {
         });
     }
 
-
+    // The render Statement
     render(){
         return(
             
             <ImageBackground source={{uri: this.state.bgURL}} style={{width: "100%", height: "100%"}}>
                 <View style={style.selectableQuizzContainer}>
                 <Text style={{fontSize: 10, color: "white"}}>{this.state.url}</Text>
+
+                {/* Category Selector */}
+
                     <Picker style={style.picker} mode={"dropdown"} selectedValue={this.state.category} onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
                         <Picker.Item style={style.pickerItem} label="Any Category" value=""/>
                         <Picker.Item style={style.pickerItem} label="General Knowledge" value="9"/>
@@ -335,14 +340,18 @@ export class SelectableQuizz extends Component {
                         <Picker.Item style={style.pickerItem} label="Japanese Anime & Manga" value="31"/>
                         <Picker.Item style={style.pickerItem} label="Cartoon & Animations" value="30"/>
                     </Picker>
-                    <Text style={{fontSize: 20, color: "white"}}>{this.state.category}</Text>
+
+                    {/* Difficulty Selector */}
+
                     <Picker style={style.picker} mode={"dropdown"} selectedValue={this.state.difficulty} onValueChange={(itemValue, itemIndex) => this.setState({difficulty: itemValue})}>
                         <Picker.Item style={style.pickerItem} label="Any Difficulty" value=""/>
                         <Picker.Item style={style.pickerItem} label="Easy" value="easy"/>
                         <Picker.Item style={style.pickerItem} label="Medium" value="medium"/>
                         <Picker.Item style={style.pickerItem} label="Hard" value="hard"/>
                     </Picker>
-                    <Text style={{fontSize: 20, color: "white"}}>{this.state.difficulty}</Text>
+
+                    {/* Type Selector */}
+
                     <Picker style={style.picker} mode={"dropdown"} selectedValue={this.state.type} onValueChange={(itemValue, itemIndex) => this.setState({type: itemValue})}>
                         <Picker.Item style={style.pickerItem} label="Any Type" value=""/>
                         <Picker.Item style={style.pickerItem} label="Multiple Choice" value="multiple"/>
@@ -361,6 +370,7 @@ export class SelectableQuizz extends Component {
     }
 }
 
+// Styles
 const style = StyleSheet.create({
     getNewButton: {
         width: "100%",
@@ -468,7 +478,7 @@ const style = StyleSheet.create({
     },
 });
 
-// Unsplash api object
+// Unsplash API object
 const unsplash = new Unsplash({
     applicationId: "c8e666b7a473b350d053a5423aae6be0e42d3aa6258d59531dc5511795853891",
     secret: "2c0324a143eb7d5172a0dfc600e3960ebb7bcc4f8382088a0b62c3731407e92c"
