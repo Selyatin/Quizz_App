@@ -37,11 +37,9 @@ export class MainOptions extends Component {
 
                         <TouchableOpacity onPress={() => this.props.navigation.navigate("SelectableQuizz",{
                             selectedOption: "Random"
-                        })} style={[style.optionButton, {backgroundColor: "red"}]}>
+                        })} style={[style.optionButton, {backgroundColor: "#005ce6"}]}>
                             <Text style={style.optionButtonText}>Custom Quizz</Text>
                         </TouchableOpacity>
-
-                        <Text style={{color: "black"}}>{this.state.string}</Text>
 
                     </View>
                 </ImageBackground>
