@@ -19,7 +19,9 @@ export class Quizz extends Component {
             wrongContainerOpacity: new Animated.Value(0),
             correctContainerIndex: -100,
             wrongContainerIndex: -100,
-            isLoading: true
+            isLoading: true,
+            currentQuestionIndex: 0,
+            totalQuestions: null,
         };
 
 
@@ -60,8 +62,9 @@ export class Quizz extends Component {
     };
 
     // API Call for Questions...Updates the State...Default URL will return random questions
-    apiCall =  (url = "https://opentdb.com/api.php?amount=1&encode=url3986") => {
-        fetch(url)
+    apiCall =  (url = "https://opentdb.com/api.php?amount=1&encode=url3986", custom = false) => {
+        if(!custom){
+            fetch(url)
         .then(res => res.json())
 
         .then(async str => {
@@ -86,6 +89,41 @@ export class Quizz extends Component {
             }
 
         }).catch();
+        } else {
+            fetch(url)
+        .then(res => res.json()).then(async str => {
+            const questionsArr = [];
+            const correctAnswer = str.results[this.state.currentQuestionIndex].correct_answer;
+            for(i=0; i < str.results[this.state.currentQuestionIndex].incorrect_answers.length; i++){
+                questionsArr.push(str.results[this.state.currentQuestionIndex].incorrect_answers[i]);
+            }
+            questionsArr.push(correctAnswer);
+
+            //Get a picture from Unsplash based on category from the OpenTrivia API
+             this.setImage(str);
+
+            this.setState({
+                Question: str.results[this.state.currentQuestionIndex].question,
+                answers: this.shuffle(questionsArr),
+                correctAnswer: correctAnswer,
+                totalQuestions: str.results.length 
+            });
+            // After setting the state values increase the current question index by 1 to move to the next question
+            this.state.currentQuestionIndex++;
+
+
+            if(this.state.isLoading) {
+                this.removeLoader();
+            }
+        }).catch(err => {
+            if(err) setTimeout(() => {
+                this.props.navigation.navigate("Home");
+                setTimeout(() => {
+                    alert(`The Quizz is finished :) with a score of ${this.state.questionsAnswers.length} Correct answers out of ${this.state.questionsAnswered}`);
+                }, 300)
+            }, 600);
+        });
+        }
     };
 
     // Shuffles the array entered
@@ -212,6 +250,11 @@ export class Quizz extends Component {
             case "Custom":
                 const url = navigation.getParam("url", "");
                 return this.apiCall(url);
+            break;
+
+            case "CustomAPI":
+                const customAPI = navigation.getParam("customAPI", "");
+                return this.apiCall(customAPI, true);
             break;
             // New optional functionality will be added here
         }

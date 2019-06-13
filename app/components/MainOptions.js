@@ -36,8 +36,15 @@ export class MainOptions extends Component {
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => this.props.navigation.navigate("SelectableQuizz",{
-                            selectedOption: "Random"
+                            selectedOption: "Custom"
                         })} style={[style.optionButton, {backgroundColor: "#005ce6"}]}>
+                            <Text style={style.optionButtonText}>OpenTrivia Quizz</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate("Quizz",{
+                            selectedOption: "CustomAPI",
+                            customAPI: "http://213.167.31.236:8080/"
+                        })} style={[style.optionButton, {backgroundColor: "red"}]}>
                             <Text style={style.optionButtonText}>Custom Quizz</Text>
                         </TouchableOpacity>
 
